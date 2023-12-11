@@ -14,5 +14,30 @@ module.exports = {
         index: 'index.html',
         port: 9001,
         historyFallbackApi: true
-    }
+    },
+    resolve: {
+        extensions: [".jsx", ".js", ".json"]
+    },
+    module: {
+        rules: [
+            {
+                test: /\.jsx?$/,
+                use: require.resolve("babel-loader"),
+                options: {
+                    presets: [require.resolve("babel/preset-react")]
+                }
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            }
+        ]
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: './public/index.html',
+            title: 'App'
+        })
+    ]
 }
